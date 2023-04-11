@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BMI Calculator</title>
+</head>
+<body> 
+    <h1 style="text-align: center">BMI Calculator</h1>
+    <form method="post">
+        <input type="text" name="feet" value="{{ request.form['feet'] }}">
+        <input type="text" name="inches" value="{{ request.form['inches'] }}">
+        <input type="text" name="weight" value="{{ request.form['weight'] }}">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
