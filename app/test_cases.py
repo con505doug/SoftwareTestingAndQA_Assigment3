@@ -5,8 +5,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from app import create_app
-#from flask.testing import FlaskClient
-#from flask import Flask
+from flask.testing import FlaskClient
+from flask import Flask
 
 
 
@@ -108,7 +108,7 @@ def test_client():
     feet = driver.find_element_by_id('feet')
     feet.send_keys('6')'''
 
-def test_page(test_client):
+def test_page(test_client: FlaskClient):
     response = test_client.get('/')
     assert response.status_code == 200
 
