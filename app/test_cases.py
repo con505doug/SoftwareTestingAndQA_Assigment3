@@ -94,8 +94,13 @@ def test_form(driver):
 def test_client():
     app = create_app()
     app.config['TESTING'] = True
+    app.config['WTF_CSRF_ENABLED'] = False
     with app.test_client() as test_client:
         yield test_client
+
+def test_page(test_client):
+    response = test_client.get('/')
+    assert response.status_code == 200
 
 '''def test_form(driver, test_client: FlaskClient):
     response = test_client.post('/', data={
@@ -107,10 +112,6 @@ def test_client():
     driver.get(url)
     feet = driver.find_element_by_id('feet')
     feet.send_keys('6')'''
-
-def test_page(test_client: FlaskClient):
-    response = test_client.get('/')
-    assert response.status_code == 200
 
 
 '''@pytest.fixture(scope='module')
