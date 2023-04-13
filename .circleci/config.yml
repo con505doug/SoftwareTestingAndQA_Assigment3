@@ -29,7 +29,7 @@ orbs:
 
     # Orchestrate jobs using workflows
     # See: https://circleci.com/docs/configuration-reference/#workflows
-  workflows:
-    build_test:
-      jobs:
-        - run_tests
+workflows:
+  build_test:
+    jobs:
+      - run_tests
