@@ -5,12 +5,8 @@ from wtforms import FloatField, SubmitField
 from wtforms.validators import InputRequired, NumberRange
 
 
-def create_app():   
-    app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'secret'
-    return app
-
-app = create_app()
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret'
 
 class bmiForm(FlaskForm):
     feet = FloatField('Feet', validators=[InputRequired(), NumberRange(0)])
