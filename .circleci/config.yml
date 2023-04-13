@@ -24,7 +24,7 @@ jobs:
           command: python -m pytest app/test_cases.py
       - run:
           name: Coveralls
-          command: coverage run -m pytest app/test_cases.py
+          command: coverage run -m pytest app/
       - run:
           name: Report
           command: coverage report

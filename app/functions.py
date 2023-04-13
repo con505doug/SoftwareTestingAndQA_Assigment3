@@ -1,5 +1,3 @@
-
-
 def bmiCalculator(height, weight):
     height_metric = height * 0.025
     weight_metric = weight * 0.45

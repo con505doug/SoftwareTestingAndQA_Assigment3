@@ -1,13 +1,15 @@
 import pytest
 from functions import *
 from selenium import webdriver
-import subprocess
-import requests
+from selenium.webdriver.common.keys import Keys
+from app import create_app
+from flask.testing import FlaskClient
+
+
 
 
 #driver = webdriver.Edge()
-url = "http://127.0.0.1:5000"
-p = subprocess.Popen(["python", "app.py"])
+url = "/"
 
 @pytest.mark.parametrize('case, height, weight', [(1, 0, 150), (2, .1, 1), (3, 2, 0), (4, 1, .1), (5, 63, 125)])
 def test_bmiCalculator(case, height, weight):
@@ -66,10 +68,41 @@ def test_categorize(case, bmi):
     if case == 12:
         assert categorize(bmi) == "Obese"
 
-def test_website_up():
-    response = requests.get(url)
+'''@pytest.fixture(scope='module')
+def app():
+    app = create_app()
+    app.config['TESTING']
+    yield app'''
+
+@pytest.fixture(scope='module')
+def test_client(app):
+    with app.test_client() as test_client:
+        with app.app_context():
+            yield test_client
+
+@pytest.fixture(scope='module')
+def driver():
+    driver = webdriver.Chrome()
+    yield driver
+    driver.quit()
+
+def test_test(driver):
+    app = create_app()
+    app.run(debug=True)
+    print(driver.get('http://127.0.0.1:5000/'))
+
+'''def test_website_up(test_client: FlaskClient):
+    response = test_client.get('/')
     assert response.status_code == 200
 
-def pytest_unconfigure(config):
-    p.kill()
+def test_form(driver, test_client: FlaskClient):
+    response = test_client.post('/', data={
+        'feet': '6',
+        'inches': '5',
+        'weight':'160'})
+    assert response.status_code == 200
+    
+    driver.get(url)
+    feet = driver.find_element_by_id('feet')
+    feet.send_keys('6')'''
 
