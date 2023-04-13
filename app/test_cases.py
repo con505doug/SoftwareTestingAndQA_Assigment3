@@ -128,4 +128,18 @@ def test_form2(driver):
     error = driver.find_element(By.XPATH, "//span[(text()='[Number must be at least 0.]')]")
     assert error.text == '[Number must be at least 0.]'
 
+def test_form3(driver):
+    driver.get('http://127.0.0.1:5000')
+    feet = driver.find_element(By.ID, 'feet')
+    feet.send_keys('0')
+    inches = driver.find_element(By.ID, 'inches')
+    inches.send_keys('0')
+    weight = driver.find_element(By.ID, 'weight')
+    weight.send_keys('125')
+    submit = driver.find_element(By.ID, 'submit')
+    submit.click()
+
+    error = driver.find_element(By.XPATH, "//span[(text()='Total height must be greater than 0 inches')]")
+    assert error.text == 'Total height must be greater than 0 inches'
+
 

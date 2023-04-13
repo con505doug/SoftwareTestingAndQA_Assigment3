@@ -40,7 +40,7 @@
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
-                    {{ message }}
+                    <span>{{ message }}</span>
                 {% endfor %}
             {% endif %}
         {% endwith %}
