@@ -27,6 +27,9 @@ jobs:
           name: Run App
           command: python app/app.py &
       - run:
+          name: Sleep
+          command: sleep 5
+      - run:
           name: Automated Unit Testing
           command: python -m pytest app/test_cases.py
       - run:
