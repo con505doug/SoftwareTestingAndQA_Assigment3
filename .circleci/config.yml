@@ -25,7 +25,8 @@ jobs:
           command: pip install -r requirements.txt
       - run:
           name: Run App
-          command: python app/app.py
+          command: python app/app.py 
+          background: true
       - run:
           name: Sleep
           command: sleep 5
