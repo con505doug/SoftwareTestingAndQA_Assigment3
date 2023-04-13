@@ -20,6 +20,9 @@ jobs:
           name: Install python dependencies
           command: pip install -r requirements.txt
       - run:
+          name: Run App
+          command: python app/app.py
+      - run:
           name: Automated Unit Testing
           command: python -m pytest app/test_cases.py
       - run:
