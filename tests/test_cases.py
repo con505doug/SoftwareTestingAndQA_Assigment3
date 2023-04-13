@@ -1,5 +1,11 @@
 import pytest
+import requests
 from app.functions import *
+from app.app import create_app
+from selenium import webdriver
+
+driver = webdriver.Edge()
+url = "http://127.0.0.1:5000"
 
 @pytest.mark.parametrize('case, height, weight', [(1, 0, 150), (2, .1, 1), (3, 2, 0), (4, 1, .1), (5, 63, 125)])
 def test_bmiCalculator(case, height, weight):
@@ -57,3 +63,17 @@ def test_categorize(case, bmi):
     # int Obese
     if case == 12:
         assert categorize(bmi) == "Obese"
+
+@pytest.fixture(scope='module')
+def test_client():
+    flask_app = create_app()
+
+    with flask_app.test_client() as testing_client:
+        with flask_app.app_context():
+            yield testing_client 
+
+
+def test_website_up():
+    response = test_client.get('/')
+    assert response.status_code == 200
+
