@@ -72,7 +72,7 @@ def test_categorize(case, bmi):
 
 @pytest.fixture(scope='module')
 def driver():
-    driver = webdriver.Edge()
+    driver = webdriver.Edge(executable_path='C:/Users/conno/OneDrive/Documents/GitHub/SoftwareTestingAndQA_Assignment3/app/msedgedriver.exe')
     yield driver
     driver.quit()
 
