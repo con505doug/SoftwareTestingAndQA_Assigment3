@@ -6,6 +6,7 @@ version: 2.1
 # See: https://circleci.com/docs/configuration-reference/#jobs
 orbs:
   coveralls: coveralls/coveralls@2.1.0
+  browser-tools: circleci/browser-tools@1.4.1
 jobs:
   run_tests:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
@@ -16,6 +17,8 @@ jobs:
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
 
       - run:
           name: Install python dependencies
