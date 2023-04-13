@@ -4,3 +4,4 @@ Flask_WTF==0.15.1
 pytest==6.2.5
 selenium==4.8.3
 WTForms==2.3.3
+werkzeug==2.0.3
