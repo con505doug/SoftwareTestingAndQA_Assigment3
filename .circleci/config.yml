@@ -4,26 +4,32 @@ version: 2.1
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
-jobs:
-  run_tests:
-    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/configuration-reference/#executor-job
-    docker:
-      - image: circleci/python:3.9.7
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
-    steps:
-      - checkout
-      - run:
-          name: Install python dependencies
-          command: pip install -r requirements.txt
-      - run:
-          name: Automated Unit Testing
-          command: python -m pytest tests/test_cases.py
-
-# Orchestrate jobs using workflows
-# See: https://circleci.com/docs/configuration-reference/#workflows
-workflows:
-  build_test:
+orbs:
+  coveralls: coveralls/coveralls@2.1.0
     jobs:
-      - run_tests
+      run_tests:
+        # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+        # See: https://circleci.com/docs/configuration-reference/#executor-job
+        docker:
+          - image: circleci/python:3.9.7
+        # Add steps to the job
+        # See: https://circleci.com/docs/configuration-reference/#steps
+        steps:
+          - checkout
+          - run:
+              name: Install python dependencies
+              command: pip install -r requirements.txt
+          - run:
+              name: Automated Unit Testing
+              command: python -m pytest tests/test_cases.py
+          - run:
+              command: npm install && make test-coverage
+              name: Install and Make
+          - coveralls/upload
+
+      # Orchestrate jobs using workflows
+      # See: https://circleci.com/docs/configuration-reference/#workflows
+      workflows:
+      build_test:
+        jobs:
+          - run_tests
