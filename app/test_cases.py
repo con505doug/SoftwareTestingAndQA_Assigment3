@@ -102,16 +102,13 @@ def test_page(test_client: FlaskClient):
     response = test_client.get('/')
     assert response.status_code == 200
 
-'''def test_form(driver, test_client: FlaskClient):
+
+def test_form_fillout(test_client: FlaskClient):
     response = test_client.post('/', data={
         'feet': '6',
         'inches': '5',
         'weight':'160'})
     assert response.status_code == 200
-    
-    driver.get(url)
-    feet = driver.find_element_by_id('feet')
-    feet.send_keys('6')'''
 
 
 '''@pytest.fixture(scope='module')
