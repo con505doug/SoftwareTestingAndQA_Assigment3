@@ -21,10 +21,10 @@ jobs:
           command: pip install -r requirements.txt
       - run:
           name: Automated Unit Testing
-          command: python -m pytest tests/test_cases.py
+          command: python -m pytest app/test_cases.py
       - run:
           name: Coveralls
-          command: coverage run -m pytest tests/test_cases.py
+          command: coverage run -m pytest app/test_cases.py
       - run:
           name: Report
           command: coverage report

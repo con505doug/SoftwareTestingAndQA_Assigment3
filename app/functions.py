@@ -1,3 +1,5 @@
+import flask as Flask
+
 def bmiCalculator(height, weight):
     height_metric = height * 0.025
     weight_metric = weight * 0.45
@@ -21,3 +23,7 @@ def categorize(bmi):
     return category
 
 
+def create_app():   
+    app = Flask(__name__)
+    app.config['SECRET_KEY'] = 'secret'
+    return app
