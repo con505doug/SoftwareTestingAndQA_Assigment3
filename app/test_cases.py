@@ -12,7 +12,7 @@ from app import create_app
 
 
 #driver = webdriver.Edge()
-url = "http://127.0.0.1:5000/"
+url = "http://127.0.0.1:5000"
 
 @pytest.mark.parametrize('case, height, weight', [(1, 0, 150), (2, .1, 1), (3, 2, 0), (4, 1, .1), (5, 63, 125)])
 def test_bmiCalculator(case, height, weight):
@@ -80,7 +80,7 @@ def driver():
     driver.quit()
 
 def test_form(driver):
-    driver.get(url)
+    driver.get('http://127.0.0.1:5000')
     feet = driver.find_element(By.ID, 'feet')
     feet.send_keys('6')
     inches = driver.find_element(By.ID, 'inches')
