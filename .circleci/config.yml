@@ -21,7 +21,7 @@ jobs:
           command: pip install -r requirements.txt
       - run:
           name: Run App
-          command: python app/app.py
+          command: python app/app.py &
       - run:
           name: Automated Unit Testing
           command: python -m pytest app/test_cases.py
@@ -31,7 +31,13 @@ jobs:
       - run:
           name: Report
           command: coverage report
-      - run: coverage html
+      - run: 
+          name: Get full html report
+          command: coverage html
+      - run:
+          name: Terminate app
+          command: killall python
+
       - store_artifacts:
           path: htmlcov
 
