@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from app import create_app
 from flask.testing import FlaskClient
+from flask import Flask
 
 
 
@@ -67,6 +68,35 @@ def test_categorize(case, bmi):
     # int Obese
     if case == 12:
         assert categorize(bmi) == "Obese"
+
+@pytest.fixture(scope='module')
+def driver():
+    driver = webdriver.Chrome()
+    yield driver
+    driver.quit()
+
+
+'''def test_form(driver, test_client: FlaskClient):
+    response = test_client.post('/', data={
+        'feet': '6',
+        'inches': '5',
+        'weight':'160'})
+    assert response.status_code == 200
+    
+    driver.get(url)
+    feet = driver.find_element_by_id('feet')
+    feet.send_keys('6')'''
+
+def test_page():
+    test = create_app()
+    test.config['TESTING'] = True
+    #client = test.test_client()
+
+    with test.test_client() as client:
+        response = client.get('/')
+        assert response.status_code == 200
+
+
 
 '''@pytest.fixture(scope='module')
 def app():
