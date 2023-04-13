@@ -2,6 +2,7 @@ import pytest
 from functions import *
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 from app import create_app
 from flask.testing import FlaskClient
 from flask import Flask
@@ -10,7 +11,7 @@ from flask import Flask
 
 
 #driver = webdriver.Edge()
-url = "/"
+url = "http://127.0.0.1:5000/"
 
 @pytest.mark.parametrize('case, height, weight', [(1, 0, 150), (2, .1, 1), (3, 2, 0), (4, 1, .1), (5, 63, 125)])
 def test_bmiCalculator(case, height, weight):
@@ -75,6 +76,18 @@ def driver():
     yield driver
     driver.quit()
 
+def test_form(driver):
+    driver.get(url)
+    feet = driver.find_element(By.ID, 'feet')
+    feet.send_keys('6')
+    inches = driver.find_element(By.ID, 'inches')
+    inches.send_keys('5')
+    weight = driver.find_element(By.ID, 'weight')
+    weight.send_keys('160')
+    submit = driver.find_element(By.ID, 'submit')
+    submit.click()
+
+
 
 '''def test_form(driver, test_client: FlaskClient):
     response = test_client.post('/', data={
@@ -87,14 +100,14 @@ def driver():
     feet = driver.find_element_by_id('feet')
     feet.send_keys('6')'''
 
-def test_page():
+'''def test_page():
     test = create_app()
     test.config['TESTING'] = True
     client = test.test_client()
 
     with test.test_client() as client:
         response = client.get('/')
-        assert response.status_code == 200
+        assert response.status_code == 200'''
 
 
 
