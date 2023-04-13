@@ -90,7 +90,12 @@ def test_form(driver):
     submit = driver.find_element(By.ID, 'submit')
     submit.click()
 
-
+@pytest.fixture(scope='module')
+def test_client():
+    app = create_app()
+    app.config['TESTING'] = True
+    with app.test_client() as test_client:
+        yield test_client
 
 '''def test_form(driver, test_client: FlaskClient):
     response = test_client.post('/', data={
@@ -103,22 +108,10 @@ def test_form(driver):
     feet = driver.find_element_by_id('feet')
     feet.send_keys('6')'''
 
-'''def test_page():
-    test = create_app()
-    test.config['TESTING'] = True
-    client = test.test_client()
+def test_page(test_client):
+    response = test_client.get('/')
+    assert response.status_code == 200
 
-    with test.test_client() as client:
-        response = client.get('/')
-        assert response.status_code == 200'''
-
-
-
-'''@pytest.fixture(scope='module')
-def app():
-    app = create_app()
-    app.config['TESTING']
-    yield app'''
 
 '''@pytest.fixture(scope='module')
 def test_client():
