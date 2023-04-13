@@ -90,7 +90,7 @@ def driver():
 def test_page():
     test = create_app()
     test.config['TESTING'] = True
-    #client = test.test_client()
+    client = test.test_client()
 
     with test.test_client() as client:
         response = client.get('/')
