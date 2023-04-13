@@ -23,9 +23,8 @@ jobs:
           name: Automated Unit Testing
           command: python -m pytest tests/test_cases.py
       - run:
-          command: npm install && make test-coverage
-          name: Install and Make
-      - coveralls/upload
+          name: Coveralls
+          command: coverage report -m
 
   # Orchestrate jobs using workflows
   # See: https://circleci.com/docs/configuration-reference/#workflows
