@@ -1,7 +1,6 @@
 import pytest
-import requests
 from app.functions import *
-from app.app import create_app
+from app.app import *
 from selenium import webdriver
 
 driver = webdriver.Edge()
