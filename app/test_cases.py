@@ -74,11 +74,13 @@ def app():
     app.config['TESTING']
     yield app'''
 
-@pytest.fixture(scope='module')
-def test_client(app):
-    with app.test_client() as test_client:
-        with app.app_context():
-            yield test_client
+'''@pytest.fixture(scope='module')
+def test_client():
+    test_client = create_app()
+    test_client.testing = True
+    test_client.run()
+    yield test_client
+
 
 @pytest.fixture(scope='module')
 def driver():
@@ -86,10 +88,11 @@ def driver():
     yield driver
     driver.quit()
 
-def test_test(driver):
-    app = create_app()
-    app.run(debug=True)
-    print(driver.get('http://127.0.0.1:5000/'))
+def test_test(test_client, driver):
+    pass
+    
+        
+    '''
 
 '''def test_website_up(test_client: FlaskClient):
     response = test_client.get('/')
