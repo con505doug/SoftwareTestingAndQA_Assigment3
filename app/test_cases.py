@@ -94,7 +94,7 @@ def test_form(driver):
 def test_client():
     app = create_app()
     app.config['TESTING'] = True
-    app.config['WTF_CSRF_ENABLED'] = False
+    #app.config['WTF_CSRF_ENABLED'] = False
     with app.test_client() as test_client:
         yield test_client
 
