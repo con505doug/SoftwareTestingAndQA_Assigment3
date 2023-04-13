@@ -1,16 +1,37 @@
 from functions import *
-from flask import Flask, render_template, request
+from flask import Flask, render_template, flash
+from flask_wtf import FlaskForm
+from wtforms import FloatField, SubmitField
+from wtforms.validators import InputRequired, NumberRange
+
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret'
+
+class bmiForm(FlaskForm):
+    feet = FloatField('Feet', validators=[InputRequired(), NumberRange(0)])
+    inches = FloatField('Inches', validators=[InputRequired(), NumberRange(0, 11)])
+    weight = FloatField('Weight', validators=[InputRequired(), NumberRange(0)])
+    submit = SubmitField('Calculate')
 
 @app.route("/", methods=('GET', 'POST'))
 @app.route("/index", methods=('GET', 'POST'))
 def bmiPage():
-    feet = request.form.get('feet')
-    inches = request.form.get('inches')
-    weight = request.form.get('weight')
-    print(feet)
-    return render_template('bmi.html') #bmi=bmi, category=category)
+    form = bmiForm()
+    bmi = 0.0
+    category = 'None'
+    if form.validate_on_submit():
+        feet = form.feet.data
+        inches = form.inches.data
+        weight = form.weight.data
+        height = feet*12 + inches
+        if height <= 0:
+            flash('Total height must be greater than 0 inches')
+        else:
+            bmi = bmiCalculator(height, weight)
+            category = categorize(bmi)
+
+    return render_template('bmi.html', form=form, bmi=bmi, category=category)
 
 if __name__ == '__main__':
     app.run(debug=True)

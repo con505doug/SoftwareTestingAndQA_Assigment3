@@ -2,14 +2,59 @@
 <html>
 <head>
     <title>BMI Calculator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body> 
     <h1 style="text-align: center">BMI Calculator</h1>
-    <form method="post">
-        <input type="text" name="feet" value="{{ request.form['feet'] }}">
-        <input type="text" name="inches" value="{{ request.form['inches'] }}">
-        <input type="text" name="weight" value="{{ request.form['weight'] }}">
-        <button type="submit">Submit</button>
+    <div class="container">
+    <form action="" method="post" novalidate>
+        {{ form.csrf_token }}
+        <p>
+            {{ form.feet.label }} <br>
+            {{ form.feet(size=30) }}
+            {% for error in form.feet.errors %}
+                <span>[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.inches.label }} <br>
+            {{ form.inches(size=30) }}
+            {% for error in form.inches.errors %}
+                <span>[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.weight.label }} <br>
+            {{ form.weight(size=30) }}
+            {% for error in form.weight.errors %}
+                <span>[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.submit() }}
+        </p>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
     </form>
+    </div>
+    <div class="container">
+    {% if category != 'None' %}
+        {% if category != 'Error' %}
+            <h3>BMI: {{ bmi }}</h3>
+            <h3>Category: {{ category }}</h3>
+        {% else %}
+            <p>Error calculating your BMI! Please try again!</p>
+        {% endif %}
+    {% endif %}
+    </div>
 </body>
 </html>
