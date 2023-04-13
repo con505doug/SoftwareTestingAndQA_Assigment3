@@ -2,10 +2,11 @@ import pytest
 from functions import *
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from app import create_app
-from flask.testing import FlaskClient
-from flask import Flask
+#from flask.testing import FlaskClient
+#from flask import Flask
 
 
 
@@ -72,7 +73,9 @@ def test_categorize(case, bmi):
 
 @pytest.fixture(scope='module')
 def driver():
-    driver = webdriver.Chrome()
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+    driver = webdriver.Chrome(options=chrome_options)
     yield driver
     driver.quit()
 
