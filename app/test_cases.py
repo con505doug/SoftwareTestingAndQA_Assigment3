@@ -98,7 +98,7 @@ def test_client():
     with app.test_client() as test_client:
         yield test_client
 
-def test_page(test_client):
+def test_page(test_client: FlaskClient):
     response = test_client.get('/')
     assert response.status_code == 200
 
