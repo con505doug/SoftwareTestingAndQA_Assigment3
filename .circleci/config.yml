@@ -24,7 +24,10 @@ jobs:
           command: python -m pytest tests/test_cases.py
       - run:
           name: Coveralls
-          command: coverage report -m
+          command: coverage run -m pytest tests/test_cases.py
+      - run:
+          name: Report
+          command: coverage report
 
   # Orchestrate jobs using workflows
   # See: https://circleci.com/docs/configuration-reference/#workflows
