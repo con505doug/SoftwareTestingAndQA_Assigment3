@@ -1,5 +1,5 @@
 import pytest
-from app.functions import *
+from functions import *
 from selenium import webdriver
 
 
