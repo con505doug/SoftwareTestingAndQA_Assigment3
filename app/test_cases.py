@@ -72,7 +72,7 @@ def test_categorize(case, bmi):
 
 @pytest.fixture(scope='module')
 def driver():
-    driver = webdriver.Chrome()
+    driver = webdriver.Edge()
     yield driver
     driver.quit()
 
