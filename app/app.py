@@ -36,25 +36,6 @@ def create_app():
 
 app = create_app()
 
-'''@app.route("/", methods=('GET', 'POST'))
-@app.route("/index", methods=('GET', 'POST'))
-def bmiPage():
-    form = bmiForm()
-    bmi = 0.0
-    category = 'None'
-    if form.validate_on_submit():
-        feet = form.feet.data
-        inches = form.inches.data
-        weight = form.weight.data
-        height = feet*12 + inches
-        if height <= 0:
-            flash('Total height must be greater than 0 inches')
-        else:
-            bmi = bmiCalculator(height, weight)
-            category = categorize(bmi)
-
-    return render_template('bmi.html', form=form, bmi=bmi, category=category)'''
-
 if __name__ == '__main__':
     app.run(debug=True)
 

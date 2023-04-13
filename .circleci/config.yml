@@ -28,6 +28,9 @@ jobs:
       - run:
           name: Report
           command: coverage report
+      - run: coverage html
+      - store_artifacts:
+          path: htmlcov
 
   # Orchestrate jobs using workflows
   # See: https://circleci.com/docs/configuration-reference/#workflows
