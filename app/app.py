@@ -5,6 +5,7 @@ from wtforms import FloatField, SubmitField
 from wtforms.validators import InputRequired, NumberRange
 
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
 
