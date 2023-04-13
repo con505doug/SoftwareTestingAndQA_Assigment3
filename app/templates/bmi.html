@@ -49,8 +49,8 @@
     <div class="container">
     {% if category != 'None' %}
         {% if category != 'Error' %}
-            <h3>BMI: {{ bmi }}</h3>
-            <h3>Category: {{ category }}</h3>
+            <h3 id="bmi">BMI: {{ bmi }}</h3>
+            <h3 id="category">Category: {{ category }}</h3>
         {% else %}
             <p>Error calculating your BMI! Please try again!</p>
         {% endif %}

@@ -79,24 +79,14 @@ def driver():
     yield driver
     driver.quit()
 
-def test_form(driver):
-    driver.get('http://127.0.0.1:5000')
-    feet = driver.find_element(By.ID, 'feet')
-    feet.send_keys('6')
-    inches = driver.find_element(By.ID, 'inches')
-    inches.send_keys('5')
-    weight = driver.find_element(By.ID, 'weight')
-    weight.send_keys('160')
-    submit = driver.find_element(By.ID, 'submit')
-    submit.click()
-
 @pytest.fixture(scope='module')
 def test_client():
     app = create_app()
     app.config['TESTING'] = True
-    #app.config['WTF_CSRF_ENABLED'] = False
+    app.config['WTF_CSRF_ENABLED'] = False
     with app.test_client() as test_client:
         yield test_client
+
 
 def test_page(test_client: FlaskClient):
     response = test_client.get('/')
@@ -110,39 +100,32 @@ def test_form_fillout(test_client: FlaskClient):
         'weight':'160'})
     assert response.status_code == 200
 
+def test_form(driver):
+    driver.get('http://127.0.0.1:5000')
+    feet = driver.find_element(By.ID, 'feet')
+    feet.send_keys('5')
+    inches = driver.find_element(By.ID, 'inches')
+    inches.send_keys('3')
+    weight = driver.find_element(By.ID, 'weight')
+    weight.send_keys('125')
+    submit = driver.find_element(By.ID, 'submit')
+    submit.click()
 
-'''@pytest.fixture(scope='module')
-def test_client():
-    test_client = create_app()
-    test_client.testing = True
-    test_client.run()
-    yield test_client
+    bmi = driver.find_element(By.ID, 'bmi')
+    assert bmi.text == 'BMI: 22.7'
 
+def test_form2(driver):
+    driver.get('http://127.0.0.1:5000')
+    feet = driver.find_element(By.ID, 'feet')
+    feet.send_keys('-1')
+    inches = driver.find_element(By.ID, 'inches')
+    inches.send_keys('3')
+    weight = driver.find_element(By.ID, 'weight')
+    weight.send_keys('125')
+    submit = driver.find_element(By.ID, 'submit')
+    submit.click()
 
-@pytest.fixture(scope='module')
-def driver():
-    driver = webdriver.Chrome()
-    yield driver
-    driver.quit()
+    error = driver.find_element(By.XPATH, "//span[(text()='[Number must be at least 0.]')]")
+    assert error.text == '[Number must be at least 0.]'
 
-def test_test(test_client, driver):
-    pass
-    
-        
-    '''
-
-'''def test_website_up(test_client: FlaskClient):
-    response = test_client.get('/')
-    assert response.status_code == 200
-
-def test_form(driver, test_client: FlaskClient):
-    response = test_client.post('/', data={
-        'feet': '6',
-        'inches': '5',
-        'weight':'160'})
-    assert response.status_code == 200
-    
-    driver.get(url)
-    feet = driver.find_element_by_id('feet')
-    feet.send_keys('6')'''
 
