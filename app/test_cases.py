@@ -100,7 +100,7 @@ def test_form_fillout(test_client: FlaskClient):
         'weight':'160'})
     assert response.status_code == 200
 
-def test_form_fillout(test_client: FlaskClient):
+def test_form_fillout2(test_client: FlaskClient):
     response = test_client.post('/', data={
         'feet': '0',
         'inches': '0',
