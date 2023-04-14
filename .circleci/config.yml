@@ -36,15 +36,13 @@ jobs:
       - run:
           name: Coveralls
           command: coverage run -m pytest app/
-        environment:
-          COVERALLS_REPO_TOKEN: ZBoeHvi2MrSMFAnF1H4HH1oqOvpsknruX
       - run:
           name: Report
           command: coverage report
       - run: 
           name: Get full html report
           command: coverage html
-
+      - coveralls/upload
       - store_artifacts:
           path: htmlcov
 
