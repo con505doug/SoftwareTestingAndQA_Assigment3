@@ -4,6 +4,7 @@ from wtforms import FloatField, SubmitField
 from wtforms.validators import InputRequired, NumberRange
 from functions import *
 
+
 class bmiForm(FlaskForm):
     feet = FloatField('Feet', validators=[InputRequired(), NumberRange(0)])
     inches = FloatField('Inches', validators=[InputRequired(), NumberRange(0, 11)])
