@@ -100,6 +100,13 @@ def test_form_fillout(test_client: FlaskClient):
         'weight':'160'})
     assert response.status_code == 200
 
+def test_form_fillout(test_client: FlaskClient):
+    response = test_client.post('/', data={
+        'feet': '0',
+        'inches': '0',
+        'weight':'160'})
+    assert response.status_code == 200
+
 def test_form(driver):
     driver.get('http://127.0.0.1:5000')
     feet = driver.find_element(By.ID, 'feet')
