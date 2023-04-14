@@ -6,12 +6,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from app import create_app
 from flask.testing import FlaskClient
-from flask import Flask
 
-
-
-
-#driver = webdriver.Edge()
 url = "http://127.0.0.1:5000"
 
 @pytest.mark.parametrize('case, height, weight', [(1, 0, 150), (2, .1, 1), (3, 2, 0), (4, 1, .1), (5, 63, 125)])

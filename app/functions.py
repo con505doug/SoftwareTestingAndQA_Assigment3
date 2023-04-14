@@ -19,4 +19,3 @@ def categorize(bmi):
         category = "Obese"
 
     return category
-
