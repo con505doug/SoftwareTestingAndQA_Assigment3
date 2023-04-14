@@ -36,6 +36,8 @@ jobs:
       - run:
           name: Coveralls
           command: coverage run -m pytest app/
+        environment:
+          COVERALLS_REPO_TOKEN: ZBoeHvi2MrSMFAnF1H4HH1oqOvpsknruX
       - run:
           name: Report
           command: coverage report
