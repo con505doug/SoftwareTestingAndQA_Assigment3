@@ -1,8 +1,8 @@
-from functions import *
 from flask import Flask, render_template, flash
 from flask_wtf import FlaskForm
 from wtforms import FloatField, SubmitField
 from wtforms.validators import InputRequired, NumberRange
+from functions import *
 
 class bmiForm(FlaskForm):
     feet = FloatField('Feet', validators=[InputRequired(), NumberRange(0)])
@@ -11,6 +11,7 @@ class bmiForm(FlaskForm):
     submit = SubmitField('Calculate')
 
 def create_app():
+    '''Creates app'''
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'secret'
 
@@ -38,6 +39,3 @@ app = create_app()
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
